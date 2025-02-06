@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 /// A function that builds a [PageView] lazily.
 typedef PageView PageViewBuilder(
@@ -9,13 +8,13 @@ typedef PageView PageViewBuilder(
 /// the current page.
 class PageVisibilityResolver {
   PageVisibilityResolver({
-    ScrollMetrics metrics,
-    double viewPortFraction,
+    ScrollMetrics? metrics,
+    double? viewPortFraction,
   }) : this._pageMetrics = metrics,
         this._viewPortFraction = viewPortFraction;
 
-  final ScrollMetrics _pageMetrics;
-  final double _viewPortFraction;
+  final ScrollMetrics? _pageMetrics;
+  final double? _viewPortFraction;
 
   /// Calculates visibility information for the page at [pageIndex].
   /// Used inside PageViews' itemBuilder, but can be also used in a
@@ -61,8 +60,8 @@ class PageVisibilityResolver {
 /// A class that contains visibility information about the current page.
 class PageVisibility {
   PageVisibility({
-    @required this.visibleFraction,
-    @required this.pagePosition,
+    required this.visibleFraction,
+    required this.pagePosition,
   });
 
   /// How much of the page is currently visible, between 0.0 and 1.0.
@@ -94,7 +93,7 @@ class PageVisibility {
 /// to easily do it, in the form of [PageVisibility].
 class PageTransformer extends StatefulWidget {
   PageTransformer({
-    @required this.pageViewBuilder,
+    required this.pageViewBuilder,
   });
 
   final PageViewBuilder pageViewBuilder;
@@ -104,7 +103,7 @@ class PageTransformer extends StatefulWidget {
 }
 
 class _PageTransformerState extends State<PageTransformer> {
-  PageVisibilityResolver _visibilityResolver;
+  PageVisibilityResolver? _visibilityResolver;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +111,7 @@ class _PageTransformerState extends State<PageTransformer> {
         context, _visibilityResolver ?? PageVisibilityResolver());
 
     final controller = pageView.controller;
-    final viewPortFraction = controller.viewportFraction;
+    final viewPortFraction = controller?.viewportFraction;
 
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification notification) {
@@ -122,6 +121,7 @@ class _PageTransformerState extends State<PageTransformer> {
             viewPortFraction: viewPortFraction,
           );
         });
+        return true;
       },
       child: pageView,
     );

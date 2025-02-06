@@ -1,8 +1,8 @@
 class IntroItem {
   IntroItem({
-    this.title,
-    this.category,
-    this.imageUrl,
+    required this.title,
+    required this.category,
+    required this.imageUrl,
   });
 
   final String title;

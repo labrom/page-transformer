@@ -5,16 +5,16 @@ import 'package:page_transformer/page_transformer.dart';
 
 class IntroPageItem extends StatelessWidget {
   IntroPageItem({
-    @required this.item,
-    @required this.pageVisibility,
+    required this.item,
+    required this.pageVisibility,
   });
 
   final IntroItem item;
   final PageVisibility pageVisibility;
 
   Widget _applyTextEffects({
-    @required double translationFactor,
-    @required Widget child,
+    required double translationFactor,
+    required Widget child,
   }) {
     final double xTranslation = pageVisibility.pagePosition * translationFactor;
 
@@ -38,7 +38,7 @@ class IntroPageItem extends StatelessWidget {
       translationFactor: 300.0,
       child: Text(
         item.category,
-        style: textTheme.caption.copyWith(
+        style: textTheme.bodySmall!.copyWith(
           color: Colors.white70,
           fontWeight: FontWeight.bold,
           letterSpacing: 2.0,
@@ -54,7 +54,7 @@ class IntroPageItem extends StatelessWidget {
         padding: const EdgeInsets.only(top: 16.0),
         child: Text(
           item.title,
-          style: textTheme.title
+          style: textTheme.titleMedium!
               .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
